@@ -1,0 +1,52 @@
+VERY HARD: Given a comma separated string of full names,
+ use JavaScript to create an alphabetical-by-Last-Name, 
+ ordered list and have it display in HTML.
+  Make the last names bold and red using CSS (NOT inline styles).
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+    <ul id="names">
+
+    </ul>
+
+<script>
+var names = "Jarrod Mcatee,John Doe,Tylar Johnson,Toni Clark";
+names.toLowerCase();
+// Spliting names from string
+var splitNames = names.split(","); 
+// added names to empty array
+var splitLastName = [];
+// Putting names into empty array and giving them index's
+for(var i = 0; i < splitNames.length; i++){
+   splitLastName.push(splitNames[i].split(" "));
+}
+// compares last name
+function sortByLastName(a, b){
+    // compare last name 
+    // a[i] <-- index of last name
+    if (a[1] > b[1]) {
+        return 1;
+    } else {
+        return -1;
+    }  
+}
+//sorting last names
+splitLastName.sort(sortByLastName);
+// make and empty variable to put info in
+var htmlString = '';
+// adds a List tag and a span tag with a class to info for CSS
+for (var i = 0; i < splitLastName.length; i++) {
+    htmlString += '<li>' + splitLastName[i][0] + ' ' + "<span class = \"redLastName\">" + splitLastName[i][1] + "</span>" + '</li>';
+}
+//adds all names back together
+var ulElement = document.getElementById("names");
+// displays info.
+ulElement.innerHTML = htmlString;
+</script> 
+</body>
+  
+</html>
